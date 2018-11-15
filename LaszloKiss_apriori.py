@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Nov 14 10:16:59 2018
+Created on Wed Nov 14 21:45:17 2018
 
 @author: lkiss
 """
@@ -10,22 +10,25 @@ import numpy as np
 import random
 import pandas as pd
 
-#rownum = sys.argv[1]
-#colnum= sys.argv[2]
-#density = sys.argv[3]
-#min_supp = 3
-#
-#rownum = int(rownum)
-#colnum = int(colnum)
-#density = float(density)
 
-rownum = 10
-colnum= 5
-density = 0.75
-min_supp = 3
+file = sys.argv[1]
+min_supp = sys.argv[2]
+min_supp = int(min_supp)
 
 
-print(sys.argv[0])
+def find_str(s, char):
+    index = 0
+
+    if char in s:
+        c = char[0]
+        for ch in s:
+            if ch == c:
+                if s[index:index+len(char)] == char:
+                    return index
+
+            index += 1
+
+    return -1
 
 def count_freq (colnamelist):
     "It can decide is this a frequent itemset"
@@ -34,21 +37,21 @@ def count_freq (colnamelist):
     df_temp['sum'] = pd.Series(df_temp.sum(axis = 1),index = df_temp.index)
     return(df_temp['sum'].loc[df_temp['sum'] == len(colnamelist)].count())
 
-#create a dataframe
-indexes = random.sample(range(1,rownum*colnum),int(rownum*colnum*density))
-array = np.zeros(rownum*colnum)
-columns = ["" for x in range(colnum)]
-array[indexes] = 1
-array = array.reshape(rownum,colnum)
-df = pd.DataFrame(array)
-df_apriori = pd.DataFrame()
+my_file=open(file,'r')
+txt = my_file.read()
+
+start_pos = find_str(txt, 'ARRAY_START')
+end_pos = find_str(txt, 'ARRAY_END')
+start_pos += len('ARRAY_START\n')
+
+txt = txt[start_pos:end_pos]
+my_file=open('temp.rcf','w')
+my_file.write(txt)
+my_file.close()
 
 
-for i in range(colnum):
-        columns[i] = chr(i+97)
-
-df.columns = columns
-
+df = pd.read_csv('temp.rcf',sep = ' ')
+df = df.iloc[:, :-1]
 
 freq_itemset = []
 
@@ -80,3 +83,5 @@ for i in range(len(freq_itemset)):
 valid_itemsets = pd.DataFrame()
 
 valid_itemsets = itemsets.loc[itemsets['Freq'] >= min_supp]
+
+valid_itemsets.to_csv('valid_itemsets.rcf',sep = '\t')

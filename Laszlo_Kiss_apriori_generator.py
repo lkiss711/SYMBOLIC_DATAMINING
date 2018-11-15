@@ -35,52 +35,65 @@ array = array.reshape(rownum,colnum)
 df = pd.DataFrame(array)
 
 for i in range(colnum):
-    columns[i] = 'col_'+str(i)
+    columns[i] = chr(i+97)
     
 df.columns = columns
+df_col = pd.DataFrame(columns)
 
 
-file = open('c:\\tt\\out.rcf','w')
+file = open('C:\\SYMBOLIC_DATAMINING\\out.rcf','w')
 file.write('#Laszlo Kiss\n')
 file.write('[Relational Context]\n')
 file.write('Default Name\n')
 file.write('[Binary Relation]\n')
 file.write('Name_of_dataset\n')
-np.savetxt('c:\\tt\\out.rcf', array,fmt = '%i')
+#np.savetxt('C:\\SYMBOLIC_DATAMINING\\out.rcf', array,fmt = '%i')
 file.close()
 
 
 for i in range(rownum):
     if(i == rownum-1):
-        file = open('c:\\tt\\out.rcf','a')
+        file = open('C:\\SYMBOLIC_DATAMINING\\out.rcf','a')
         file.write('o'+str(i+1)+'\n')
         file.close()
     else:
-        file = open('c:\\tt\\out.rcf','a')
+        file = open('C:\\SYMBOLIC_DATAMINING\\out.rcf','a')
         file.write('o'+str(i+1)+' | ')
         file.close()
 
 
 for i in range(colnum):
     if(i == colnum-1):
-        file = open('c:\\tt\\out.rcf','a')
+        file = open('C:\\SYMBOLIC_DATAMINING\\out.rcf','a')
         file.write(chr(i+97)+'\n')
         file.close()
     else:
-        file = open('c:\\tt\\out.rcf','a')
+        file = open('C:\\SYMBOLIC_DATAMINING\\out.rcf','a')
         file.write(chr(i+97)+' | ')
         file.close()
 
-file = open('c:\\tt\\out.rcf','ab')
+file = open('C:\\SYMBOLIC_DATAMINING\\out.rcf','a')
+file.write('ARRAY_START\n')
+file.close()
+
+file = open('C:\\SYMBOLIC_DATAMINING\\out.rcf','a')
+np.savetxt(file,df_col,fmt = '%s',newline = ' ')
+file.write('\n')
+file.close()
+
+
+file = open('C:\\SYMBOLIC_DATAMINING\\out.rcf','ab')
 np.savetxt(file,array,fmt = '%d',delimiter = ' ',newline='\r\n')
 file.close()
 
-
-
-file = open('c:\\tt\\out.rcf','a')
-file.write('[END Relational Context]')
+file = open('C:\\SYMBOLIC_DATAMINING\\out.rcf','a')
+file.write('ARRAY_END\n')
 file.close()
 
+
+file = open('C:\\SYMBOLIC_DATAMINING\\out.rcf','a')
+file.write('[END Relational Context]')
+file.close()
 
 
 
