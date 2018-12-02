@@ -9,11 +9,14 @@ import sys
 import numpy as np
 import random
 import pandas as pd
+import os
+
+os.chdir('C:\\Users\\lkiss\\SYMBOLIC_DATAMINING\\PYTHON_PROJECT')
 
 rownum = sys.argv[1]
 colnum= sys.argv[2]
 density = sys.argv[3]
-min_supp = 3
+#min_supp = 3
 
 rownum = int(rownum)
 colnum = int(colnum)
@@ -41,7 +44,7 @@ df.columns = columns
 df_col = pd.DataFrame(columns)
 
 
-file = open('C:\\SYMBOLIC_DATAMINING\\out.rcf','w')
+file = open('out.rcf','w')
 file.write('#Laszlo Kiss\n')
 file.write('[Relational Context]\n')
 file.write('Default Name\n')
@@ -53,45 +56,45 @@ file.close()
 
 for i in range(rownum):
     if(i == rownum-1):
-        file = open('C:\\SYMBOLIC_DATAMINING\\out.rcf','a')
+        file = open('out.rcf','a')
         file.write('o'+str(i+1)+'\n')
         file.close()
     else:
-        file = open('C:\\SYMBOLIC_DATAMINING\\out.rcf','a')
+        file = open('out.rcf','a')
         file.write('o'+str(i+1)+' | ')
         file.close()
 
 
 for i in range(colnum):
     if(i == colnum-1):
-        file = open('C:\\SYMBOLIC_DATAMINING\\out.rcf','a')
+        file = open('out.rcf','a')
         file.write(chr(i+97)+'\n')
         file.close()
     else:
-        file = open('C:\\SYMBOLIC_DATAMINING\\out.rcf','a')
+        file = open('out.rcf','a')
         file.write(chr(i+97)+' | ')
         file.close()
 
-file = open('C:\\SYMBOLIC_DATAMINING\\out.rcf','a')
+file = open('out.rcf','a')
 file.write('ARRAY_START\n')
 file.close()
 
-file = open('C:\\SYMBOLIC_DATAMINING\\out.rcf','a')
+file = open('out.rcf','a')
 np.savetxt(file,df_col,fmt = '%s',newline = ' ')
 file.write('\n')
 file.close()
 
 
-file = open('C:\\SYMBOLIC_DATAMINING\\out.rcf','ab')
+file = open('out.rcf','ab')
 np.savetxt(file,array,fmt = '%d',delimiter = ' ',newline='\r\n')
 file.close()
 
-file = open('C:\\SYMBOLIC_DATAMINING\\out.rcf','a')
+file = open('out.rcf','a')
 file.write('ARRAY_END\n')
 file.close()
 
 
-file = open('C:\\SYMBOLIC_DATAMINING\\out.rcf','a')
+file = open('out.rcf','a')
 file.write('[END Relational Context]')
 file.close()
 

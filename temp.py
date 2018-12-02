@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 """
+Created on Sat Nov 17 16:35:53 2018
+
+@author: lkiss
+"""
+
+# -*- coding: utf-8 -*-
+"""
 Created on Wed Nov 14 21:45:17 2018
 
 @author: lkiss
@@ -9,18 +16,11 @@ import sys
 import numpy as np
 import random
 import pandas as pd
-import os
 
-os.chdir('C:\\Users\\lkiss\\SYMBOLIC_DATAMINING\\PYTHON_PROJECT')
 
-file = sys.argv[1]
-min_supp = sys.argv[2]
+file = 'out.rcp'
+min_supp = 3
 min_supp = int(min_supp)
-
-
-#file = 'out.rcf'
-#min_supp = 3
-
 
 
 def find_str(s, char):

@@ -1,0 +1,8 @@
+	Itemset	Len	Freq	Indexes	Isclosed
+0	a	1	4	0124	1
+2	c	1	4	1234	1
+5	ac	2	3	124	1
+8	be	2	4	0234	1
+11	abe	3	3	024	1
+13	bce	3	3	234	1
+14	abce	4	2	24	1
