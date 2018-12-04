@@ -13,13 +13,13 @@ import os
 
 os.chdir('C:\\Users\\lkiss\\SYMBOLIC_DATAMINING\\PYTHON_PROJECT')
 
-#file = sys.argv[1]
-#min_supp = sys.argv[2]
-#min_supp = int(min_supp)
+file = sys.argv[1]
+min_supp = sys.argv[2]
+min_supp = int(min_supp)
 
 
-file = 'out.rcf'
-min_supp = 2
+#file = 'out.rcf'
+#min_supp = 2
 
 def get_indexes(itemset):
     df_temp = pd.DataFrame()
@@ -93,7 +93,6 @@ for colname in df.columns:
 
 item_set_name_len = 1
 max_item_set_name_len = len(freq_itemset)
-
 
 
 
