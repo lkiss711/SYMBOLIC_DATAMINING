@@ -10,8 +10,13 @@ import numpy as np
 import random
 import pandas as pd
 import os
+import time
 
-os.chdir('C:\\Users\\lkiss\\SYMBOLIC_DATAMINING\\PYTHON_PROJECT')
+start_time = time.time()
+cwd = os.getcwd()
+
+#os.chdir('C:\\Users\\lkiss\\SYMBOLIC_DATAMINING\\PYTHON_PROJECT')
+os.chdir(cwd)
 
 rownum = sys.argv[1]
 colnum= sys.argv[2]
@@ -97,6 +102,7 @@ file.close()
 file = open('out.rcf','a')
 file.write('[END Relational Context]')
 file.close()
+#print("--- %s seconds ---" % (time.time() - start_time))
 
 
 

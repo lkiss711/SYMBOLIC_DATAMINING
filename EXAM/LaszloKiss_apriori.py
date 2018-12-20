@@ -10,8 +10,13 @@ import numpy as np
 import random
 import pandas as pd
 import os
+import time
 
-os.chdir('C:\\Users\\lkiss\\SYMBOLIC_DATAMINING\\PYTHON_PROJECT')
+
+start_time = time.time()
+cwd = os.getcwd()
+os.chdir(cwd)
+#os.chdir('C:\\Users\\lkiss\\SYMBOLIC_DATAMINING\\PYTHON_PROJECT')
 
 file = sys.argv[1]
 min_supp = sys.argv[2]
@@ -60,6 +65,10 @@ my_file.close()
 df = pd.read_csv('temp.rcf',sep = ' ')
 df = df.iloc[:, :-1]
 
+print("The intput data\n")
+print(df)
+print("\n")
+
 freq_itemset = []
 
 for colname in df.columns:
@@ -91,4 +100,9 @@ valid_itemsets = pd.DataFrame()
 
 valid_itemsets = itemsets.loc[itemsets['Freq'] >= min_supp]
 
+print("The frequent itemsets with minimum support of %i:\n" % min_supp)
+print(valid_itemsets)
+print("\n")
+
 valid_itemsets.to_csv('valid_itemsets.rcf',sep = '\t')
+print("The exexcution time was:  %s seconds" % (time.time() - start_time))
